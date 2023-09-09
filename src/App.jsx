@@ -1,11 +1,14 @@
 import './index.css';
+import { styled } from 'styled-components';
+import Ages from './components/age';
 
 function App() {  
 
   return (
-    <>
-      <h1>App age calculator</h1>
-    </>
+    <div className='bg-offwhite min-h-full h-screen flex items-center justify-center'>
+      
+      <Ages />
+    </div>
   )
 }
 
