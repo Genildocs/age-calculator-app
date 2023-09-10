@@ -4,28 +4,36 @@ export default function Inputs({ setDays, setMonths, setYears }) {
     const [iyars, setIyars] = useState("");
     const [imonth, setImonth] = useState("");
     const [iday, setIday] = useState("");
-
+  
     const dateNow = new Date();
     const calcYears = () => {
-        setYears(dateNow.getFullYear() - iyars);
+        if (dateNow.getMonth() < Number(imonth)) {
+            setYears(dateNow.getFullYear() - 1 - iyars);
+        } else {
+            setYears(dateNow.getFullYear() - iyars);
+        }
         setIyars("");
     };
 
-    const calcMonth = () => { 
-        if(dateNow.getDay() < Number(iday)){
-            setMonths(dateNow.getMonth() - imonth)
-        }else{
-            setMonths((dateNow.getMonth() + 1) - imonth)
-        }        
-        setImonth('')
+    const calcMonth = () => {
+        if (dateNow.getDate() < Number(iday)) {
+            setMonths(Math.abs(dateNow.getMonth() - imonth));
+        } else {
+            setMonths(dateNow.getMonth() + 1 - imonth);
+        }
+        setImonth("");
     };
 
     const handleCalcAge = () => {
         if (iday === "" || isNaN(iday) || iday < 0) return;
+        if (dateNow.getDate() < iday) {
+            setDays(30 - (iday - dateNow.getDate()));
+        } else {
+            setDays(dateNow.getDate - iday);
+        }
         setIday("");
         calcMonth();
         calcYears();
-       
     };
 
     return (
@@ -33,7 +41,7 @@ export default function Inputs({ setDays, setMonths, setYears }) {
             <div>
                 <p className="uppercase text-smokeygrey">day</p>
                 <Inputss
-                    type="text"
+                    type="text"        
                     value={iday}
                     onChange={(e) => setIday(e.target.value)}
                 />
@@ -55,7 +63,7 @@ export default function Inputs({ setDays, setMonths, setYears }) {
                 />
             </div>
             <div className="col-span-3 flex justify-center mt-10 mb-10">
-                <button  onClick={handleCalcAge}>
+                <button onClick={handleCalcAge}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="46"

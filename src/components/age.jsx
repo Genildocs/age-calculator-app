@@ -6,6 +6,7 @@ export default function Ages() {
     const [years, setYears] = useState("--");
     const [months, setMonths] = useState("--");
     const [days, setDays] = useState("--");
+    
     return (
         <Wrapper className="bg-white">
             <Inputs setDays={setDays} setMonths={setMonths} setYears={setYears} />
