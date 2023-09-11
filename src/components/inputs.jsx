@@ -1,35 +1,41 @@
 import { useState } from "react";
 import { styled } from "styled-components";
+import moment from "moment";
 export default function Inputs({ setDays, setMonths, setYears }) {
     const [iyars, setIyars] = useState("");
     const [imonth, setImonth] = useState("");
     const [iday, setIday] = useState("");
-  
-    const dateNow = new Date();
+    const actualDay = moment().date();
+    const actualMonth = moment().month();
+    const actualYears = moment().year();
+
     const calcYears = () => {
-        if (dateNow.getMonth() < Number(imonth)) {
-            setYears(dateNow.getFullYear() - 1 - iyars);
+        if ((actualMonth + 1) < imonth) {
+            setYears((actualYears - 1) - iyars);
         } else {
-            setYears(dateNow.getFullYear() - iyars);
+            setYears(actualYears - iyars);
         }
         setIyars("");
     };
 
     const calcMonth = () => {
-        if (dateNow.getDate() < Number(iday)) {
-            setMonths(Math.abs(dateNow.getMonth() - imonth));
-        } else {
-            setMonths(dateNow.getMonth() + 1 - imonth);
+        if (imonth > (actualMonth + 1)) {
+            setMonths(Math.abs((imonth - (actualMonth)) - 12));
+        }else if(iday <= actualDay){
+            setMonths(Math.abs((imonth - (actualMonth + 1))))
+        }else{
+            setMonths((actualMonth) - imonth)
         }
+
         setImonth("");
     };
 
     const handleCalcAge = () => {
         if (iday === "" || isNaN(iday) || iday < 0) return;
-        if (dateNow.getDate() < iday) {
-            setDays(30 - (iday - dateNow.getDate()));
+        if (iday > actualDay) {
+            setDays(30 - (iday - actualDay));
         } else {
-            setDays(dateNow.getDate - iday);
+            setDays(actualDay - iday);
         }
         setIday("");
         calcMonth();
@@ -62,21 +68,21 @@ export default function Inputs({ setDays, setMonths, setYears }) {
                     onChange={(e) => setIyars(e.target.value)}
                 />
             </div>
-            <div className="col-span-3 flex justify-center mt-10 mb-10">
-                <button onClick={handleCalcAge}>
-                    <svg
+            <ContainerBtn className="col-span-3 flex justify-center mt-10 mb-10">
+                <Btn onClick={handleCalcAge}>
+                    <Svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="46"
                         height="44"
                         viewBox="0 0 46 44"
-                        className="bg-purple rounded-full"
+                       
                     >
                         <g fill="none" stroke="#FFF" strokeWidth="2">
                             <path d="M1 22.019C8.333 21.686 23 25.616 23 44M23 44V0M45 22.019C37.667 21.686 23 25.616 23 44" />
                         </g>
-                    </svg>
-                </button>
-            </div>
+                    </Svg>
+                </Btn>
+            </ContainerBtn>
         </WrapperInputs>
     );
 }
@@ -97,3 +103,32 @@ export const WrapperInputs = styled.div`
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
 `;
+
+
+export const ContainerBtn = styled.div`
+    position: relative;
+
+    &::before{
+        content: "";
+        height: 1px;
+        width: 90%;
+        background: #dbdbdb;
+        position: absolute;
+        bottom: 50%;
+    }
+
+`
+
+
+export const Svg = styled.svg`
+    height: 1.5rem;
+    width:  1.5rem;
+
+`
+
+export const Btn = styled.button`
+    background-color: #854dff;
+    padding: 1rem;
+    border-radius: 50%;
+    position: relative;  
+`
