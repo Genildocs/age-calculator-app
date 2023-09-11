@@ -8,20 +8,20 @@ export default function Ages() {
   
 
     return (
-        <Wrapper className="bg-white">
+        <Wrapper className="bg-white lg:w-[30%]">
             <Inputs setDays={setDays} setMonths={setMonths} setYears={setYears} />
-            <div>
-                <div className="text-5xl font-light">
+            <div className="lg:ml-10">
+                <div className="text-5xl 2xl:text-7xl font-light">
                     <p>
                         <span className="text-purple">{years}</span> years
                     </p>
                 </div>
-                <div className="text-5xl font-light">
+                <div className="text-5xl 2xl:text-7xl  font-light">
                     <p>
                         <span className="text-purple">{months}</span> months
                     </p>
                 </div>
-                <div className="text-5xl font-light">
+                <div className="text-5xl 2xl:text-7xl  font-light">
                     <p>
                         <span className="text-purple">{days}</span> days
                     </p>

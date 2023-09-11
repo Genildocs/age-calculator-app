@@ -71,7 +71,7 @@ export default function Inputs({ setDays, setMonths, setYears }) {
                     onChange={(e) => setIyars(e.target.value)}
                 />
             </div>
-            <ContainerBtn className="col-span-3 flex justify-center mt-10 mb-10">
+            <ContainerBtn className="col-span-3 flex justify-center mt-10 mb-10 lg:justify-end">
                 <Btn onClick={handleCalcAge}>
                     <Svg
                         xmlns="http://www.w3.org/2000/svg"
