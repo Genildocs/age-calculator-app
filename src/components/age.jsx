@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Inputs from "./inputs";
 import { styled } from "styled-components";
-import moment from "moment";
 export default function Ages() {
     const [years, setYears] = useState("--");
     const [months, setMonths] = useState("--");

@@ -10,8 +10,8 @@ export default function Inputs({ setDays, setMonths, setYears }) {
     const actualYears = moment().year();
 
     const calcYears = () => {
-        if ((actualMonth + 1) < imonth) {
-            setYears((actualYears - 1) - iyars);
+        if (actualMonth + 1 < imonth) {
+            setYears(actualYears - 1 - iyars);
         } else {
             setYears(actualYears - iyars);
         }
@@ -19,12 +19,12 @@ export default function Inputs({ setDays, setMonths, setYears }) {
     };
 
     const calcMonth = () => {
-        if (imonth > (actualMonth + 1)) {
-            setMonths(Math.abs((imonth - (actualMonth)) - 12));
-        }else if(iday <= actualDay){
-            setMonths(Math.abs((imonth - (actualMonth + 1))))
-        }else{
-            setMonths((actualMonth) - imonth)
+        if (imonth > actualMonth + 1) {
+            setMonths(Math.abs(imonth - actualMonth - 12));
+        } else if (iday <= actualDay) {
+            setMonths(Math.abs(imonth - (actualMonth + 1)));
+        } else {
+            setMonths(actualMonth - imonth);
         }
 
         setImonth("");
@@ -47,7 +47,8 @@ export default function Inputs({ setDays, setMonths, setYears }) {
             <div>
                 <p className="uppercase text-smokeygrey">day</p>
                 <Inputss
-                    type="text"        
+                    type="text"
+                    placeholder="DD"
                     value={iday}
                     onChange={(e) => setIday(e.target.value)}
                 />
@@ -56,6 +57,7 @@ export default function Inputs({ setDays, setMonths, setYears }) {
                 <p className="uppercase text-smokeygrey">month</p>
                 <Inputss
                     type="text"
+                    placeholder="MM"
                     value={imonth}
                     onChange={(e) => setImonth(e.target.value)}
                 />
@@ -64,6 +66,7 @@ export default function Inputs({ setDays, setMonths, setYears }) {
                 <p className="uppercase text-smokeygrey">year</p>
                 <Inputss
                     type="text"
+                    placeholder="YYYY"
                     value={iyars}
                     onChange={(e) => setIyars(e.target.value)}
                 />
@@ -75,7 +78,6 @@ export default function Inputs({ setDays, setMonths, setYears }) {
                         width="46"
                         height="44"
                         viewBox="0 0 46 44"
-                       
                     >
                         <g fill="none" stroke="#FFF" strokeWidth="2">
                             <path d="M1 22.019C8.333 21.686 23 25.616 23 44M23 44V0M45 22.019C37.667 21.686 23 25.616 23 44" />
@@ -104,31 +106,27 @@ export const WrapperInputs = styled.div`
   gap: 1rem;
 `;
 
-
 export const ContainerBtn = styled.div`
-    position: relative;
+  position: relative;
 
-    &::before{
-        content: "";
-        height: 1px;
-        width: 90%;
-        background: #dbdbdb;
-        position: absolute;
-        bottom: 50%;
-    }
-
-`
-
+  &::before {
+    content: "";
+    height: 1px;
+    width: 90%;
+    background: #dbdbdb;
+    position: absolute;
+    bottom: 50%;
+  }
+`;
 
 export const Svg = styled.svg`
-    height: 1.5rem;
-    width:  1.5rem;
-
-`
+  height: 1.5rem;
+  width: 1.5rem;
+`;
 
 export const Btn = styled.button`
-    background-color: #854dff;
-    padding: 1rem;
-    border-radius: 50%;
-    position: relative;  
-`
+  background-color: #854dff;
+  padding: 1rem;
+  border-radius: 50%;
+  position: relative;
+`;
