@@ -49,7 +49,9 @@ export default function Inputs({ setDays, setMonths, setYears }) {
                 <Inputss
                     type="text"
                     placeholder="DD"
+                    name="day"
                     value={iday}
+                    required
                     onChange={(e) => setIday(e.target.value)}
                 />
             </div>
@@ -58,7 +60,9 @@ export default function Inputs({ setDays, setMonths, setYears }) {
                 <Inputss
                     type="text"
                     placeholder="MM"
+                    name="month"
                     value={imonth}
+                    required="true"
                     onChange={(e) => setImonth(e.target.value)}
                 />
             </div>
@@ -67,7 +71,9 @@ export default function Inputs({ setDays, setMonths, setYears }) {
                 <Inputss
                     type="text"
                     placeholder="YYYY"
+                    name="years"
                     value={iyars}
+                    required
                     onChange={(e) => setIyars(e.target.value)}
                 />
             </div>
@@ -108,7 +114,6 @@ export const WrapperInputs = styled.div`
 
 export const ContainerBtn = styled.div`
   position: relative;
-
   &::before {
     content: "";
     height: 1px;
@@ -129,4 +134,15 @@ export const Btn = styled.button`
   padding: 1rem;
   border-radius: 50%;
   position: relative;
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: #141414;
+  }
+
+  &:active {
+    background-color: #854dff;
+    transform: translateY(1px);
+    transform: scale(1.1);
+  }
 `;
